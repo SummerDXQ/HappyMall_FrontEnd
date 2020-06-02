@@ -13,12 +13,15 @@ function resolve(dir){
 
 module.exports = {
     entry: {
-        pageOne:'./public/pageOne/index.js',
-        pageTwo:'./public/pageTwo/index.js',
+        // pageOne:'./public/pageOne/index.js',
+        // pageTwo:'./public/pageTwo/index.js',
+        'index':'./src/page/index/index.js'
     },
     output: {
-        path: path.resolve(__dirname,'../build'),
-        filename: "[name][hash].js"
+        path: path.resolve(__dirname,'../dist'),
+        filename: "js/[name].js",
+        // filename: "js/[name][hash].js",
+        publicPath: "/dist"
     },
     resolve: {
         extensions: ['.js'],
@@ -27,7 +30,11 @@ module.exports = {
             resolve('node_modules')
         ],
         alias: {
-            'assets':resolve('/public/assets')
+            // 'assets':resolve('/public/assets'),
+            util : path.resolve(__dirname,'../src/util'),
+            page : __dirname + '/src/page',
+            service : __dirname + '/src/service',
+            image   : __dirname + '/src/image'
         }
     },
     module: {
@@ -45,6 +52,7 @@ module.exports = {
                 test: /\.less$/,
                 use: ['style-loader','css-loader','less-loader']
             },
+            // for scss
             {
                 test: /\.scss$/,
                 use: ['style-loader','css-loader','sass-loader',{
@@ -56,6 +64,7 @@ module.exports = {
                     }
                 }]
             },
+            // for images
             {
                 test: /\.(png|jpg|gif|jpeg)$/,
                 use: [{
@@ -67,6 +76,7 @@ module.exports = {
                     }
                 }],
             },
+            // for fonts
             {
                 test: /\.(eot|svg|tff|woff|woff2|otf|ttf)$/i,
                 use: [
@@ -80,6 +90,7 @@ module.exports = {
                     },
                 ],
             },
+            // for js
             {
                 test: /\.js$/,
                 include: [resolve('public')],
@@ -91,8 +102,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./public/index.html",
-            filename: "webpack.html",
+            template: "./src/index.html",
+            filename: "index.html",
             minify:{
                 minimize:true,
                 removeComments:true,

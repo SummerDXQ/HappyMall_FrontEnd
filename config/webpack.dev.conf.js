@@ -5,12 +5,18 @@ const common = require('./webpack.common.conf');
 module.exports = merge(common,
     {
         devServer: {
-            contentBase:'./build',
+            contentBase:'./dist',
             host:'localhost',
             port:'8080',
             open:'true',
             hot:true,
-            hotOnly:true
+            hotOnly:true,
+            proxy: {
+                '/product/list.do': {
+                    target: 'http://admintest.happymmall.com',
+                    changeOrigin: true
+                },
+            }
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
