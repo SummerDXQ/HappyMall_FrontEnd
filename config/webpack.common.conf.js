@@ -26,8 +26,8 @@ var getHtmlConfig = function(name, title){
 module.exports = {
     entry: {
         'index':'./src/page/index/index.js',
-        // 'common':'./src/page/common/index.js',
-        // 'login':'./src/page/login/index.js',
+        'common':'./src/page/common/index.js',
+        'user-login':'./src/page/user-login/index.js',
         'result':'./src/page/result/index.js',
     },
     output: {
@@ -135,6 +135,7 @@ module.exports = {
         // }),
         new HtmlWebpackPlugin(getHtmlConfig('index', 'Home Page')),
         new HtmlWebpackPlugin(getHtmlConfig('result', 'Result Page')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-login', 'User Login')),
         new ExtractTextPlugin('./css/[name].css'),
         new HappyPack({
             id:"happyBabel",

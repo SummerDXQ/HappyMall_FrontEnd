@@ -7,10 +7,14 @@
 <body>
 <%= require('html-loader!./layout/nav-simple.html')%>
 <div class="page-wrap w">
-    <div class="result-con">
-        <h1 class="result-title">
-            Congratulation, Successfully Register!
-        </h1>
+    <div class="result-con register-success">
+        <h1 class="result-title">Congratulation, Successfully Register!</h1>
+        <div class="result-content">
+            <a href="./index.html" class="link">Back to Home Page!</a>
+        </div>
+    </div>
+    <div class="result-con default-success">
+        <h1 class="result-title">Congratulation, Successfully Operate!</h1>
         <div class="result-content">
             <a href="./index.html" class="link">Back to Home Page!</a>
         </div>

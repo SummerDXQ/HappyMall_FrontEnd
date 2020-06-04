@@ -15,7 +15,7 @@ let _hm = {
                 if(res.status === 0){
                     typeof param.success === 'function' && param.success(res.data)
                 }
-                // haven't login
+                // haven't user-login
                 else if(res.status === 10){
                     this.doLogin();
                 }
@@ -29,9 +29,9 @@ let _hm = {
             }
         })
     },
-    // login
+    // user-login
     doLogin:function () {
-        window.location.href = './login.html?redirect=' + encodeURIComponent(window.location.href);
+        window.location.href = './user-login.html?redirect=' + encodeURIComponent(window.location.href);
     },
     // get url
     getServerUrl:function (path) {

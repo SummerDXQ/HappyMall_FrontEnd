@@ -16,6 +16,10 @@ module.exports = merge(common,
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },
+                '/user/login.do': {
+                    target: 'http://admintest.happymmall.com',
+                    changeOrigin: true
+                },
             }
         },
         plugins: [
