@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!./layout/head-common.html')%>
+    <title><%= htmlWebpackPlugin.options.title%></title>
+</head>
+<body>
+<%= require('html-loader!./layout/nav-simple.html')%>
+<div class="page-wrap w">
+    <div class="result-con">
+        <h1 class="result-title">
+            Congratulation, Successfully Register!
+        </h1>
+        <div class="result-content">
+            <a href="./index.html" class="link">Back to Home Page!</a>
+        </div>
+    </div>
+</div>
+<%= require('html-loader!./layout/footer.html')%>
+</body>
+</html>

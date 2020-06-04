@@ -70,7 +70,7 @@ let _hm = {
         }
     },
     // back to home page
-    getHome:function () {
+    goHome:function () {
         window.location.href ='./index.html';
     }
 }

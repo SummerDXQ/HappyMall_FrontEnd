@@ -11,11 +11,24 @@ function resolve(dir){
     return path.join(__dirname,'..',dir)
 }
 
+// get html-webpack-plugin params
+var getHtmlConfig = function(name, title){
+    return {
+        template    : './src/view/' + name + '.html',
+        filename    : 'view/' + name + '.html',
+        title       : title,
+        inject      : true,
+        hash        : true,
+        chunks      : ['common', name]
+    };
+};
+
 module.exports = {
     entry: {
-        // pageOne:'./public/pageOne/index.js',
-        // pageTwo:'./public/pageTwo/index.js',
-        'index':'./src/page/index/index.js'
+        'index':'./src/page/index/index.js',
+        // 'common':'./src/page/common/index.js',
+        // 'login':'./src/page/login/index.js',
+        'result':'./src/page/result/index.js',
     },
     output: {
         path: path.resolve(__dirname,'../dist'),
@@ -30,11 +43,11 @@ module.exports = {
             resolve('node_modules')
         ],
         alias: {
-            // 'assets':resolve('/public/assets'),
+            node_modules : path.resolve(__dirname,'../node_modules'),
             util : path.resolve(__dirname,'../src/util'),
-            page : __dirname + '/src/page',
-            service : __dirname + '/src/service',
-            image   : __dirname + '/src/image'
+            page : path.resolve(__dirname,'../src/page'),
+            service : path.resolve(__dirname,'../src/service'),
+            image : path.resolve(__dirname,'../src/image')
         }
     },
     module: {
@@ -98,23 +111,30 @@ module.exports = {
                 loader: "happypack/loader?id=happyBabel",
                 // use: ['babel-loader']
             },
+            // for string
+            {
+                test: /\.string$/,
+                loader: 'html-loader'
+            },
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/index.html",
-            filename: "index.html",
-            minify:{
-                minimize:true,
-                removeComments:true,
-                removeAttributeQuotes:true,
-                collapseWhitespace:true,
-                minifyCSS:true,
-                minifyJS:true,
-                removeEmptyElements:true
-            },
-            hash:true
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: "./src/view/index.html",
+        //     filename: "index.html",
+        //     minify:{
+        //         minimize:true,
+        //         removeComments:true,
+        //         removeAttributeQuotes:true,
+        //         collapseWhitespace:true,
+        //         minifyCSS:true,
+        //         minifyJS:true,
+        //         removeEmptyElements:true
+        //     },
+        //     hash:true
+        // }),
+        new HtmlWebpackPlugin(getHtmlConfig('index', 'Home Page')),
+        new HtmlWebpackPlugin(getHtmlConfig('result', 'Result Page')),
         new ExtractTextPlugin('./css/[name].css'),
         new HappyPack({
             id:"happyBabel",
