@@ -16,7 +16,7 @@ module.exports = merge(common,
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },
-                '/user/login.do': {
+                '/user/': {
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },

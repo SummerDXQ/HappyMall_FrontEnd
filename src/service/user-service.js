@@ -1,7 +1,7 @@
 var _mm = require('util/hm.js');
 
 var _user = {
-    // 用户登录
+    // User login
     login : function(userInfo, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/login.do'),
@@ -11,7 +11,7 @@ var _user = {
             error   : reject
         });
     },
-    // 检查用户名
+    // Check username's availability
     checkUsername : function(username, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/check_valid.do'),
@@ -24,7 +24,7 @@ var _user = {
             error   : reject
         });
     },
-    // 用户注册
+    // User register
     register : function(userInfo, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/register.do'),
