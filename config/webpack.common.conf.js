@@ -29,6 +29,9 @@ module.exports = {
         'common':'./src/page/common/index.js',
         'user-login':'./src/page/user-login/index.js',
         'user-register':'./src/page/user-register/index.js',
+        'user-pass-reset':'./src/page/user-pass-reset/index.js',
+        'user-center':'./src/page/user-center/index.js',
+        'user-center-update':'./src/page/user-center-update/index.js',
         'result':'./src/page/result/index.js',
     },
     output: {
@@ -138,6 +141,9 @@ module.exports = {
         new HtmlWebpackPlugin(getHtmlConfig('result', 'Result Page')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', 'User Login')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', 'User Register')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', 'Password Reset')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-center', 'User Center')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-center-update', 'Update Profile')),
         new ExtractTextPlugin('./css/[name].css'),
         new HappyPack({
             id:"happyBabel",

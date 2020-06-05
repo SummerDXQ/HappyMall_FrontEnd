@@ -43,20 +43,19 @@ var _user = {
             error   : reject
         });
     },
-    // 获取用户密码提示问题
+    // Get password reset remind question
     getQuestion : function(username, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/forget_get_question.do'),
-            data    : {
-                username : username
-            },
+            data    : {username : username},
             method  : 'POST',
             success : resolve,
             error   : reject
         });
     },
-    // 检查密码提示问题答案
+    // check answer for password reset question
     checkAnswer : function(userInfo, resolve, reject){
+        console.log(userInfo);
         _mm.request({
             url     : _mm.getServerUrl('/user/forget_check_answer.do'),
             data    : userInfo,
@@ -65,7 +64,7 @@ var _user = {
             error   : reject
         });
     },
-    // 重置密码
+    // reset password
     resetPassword : function(userInfo, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/forget_reset_password.do'),

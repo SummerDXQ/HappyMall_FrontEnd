@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!./layout/head-common.html')%>
+    <title><%= htmlWebpackPlugin.options.title%></title>
+</head>
+<body>
+<%= require('html-loader!./layout/nav.html')%>
+<%= require('html-loader!./layout/header.html')%>
+<div class="crumb">
+    <div class="w">
+        <div class="crumb-con">
+            <a href="./index.html" class="link">HMall</a>
+            <span>></span>
+            <span class="link-text">Edit Profile</span>
+        </div>
+    </div>
+</div>
+<div class="page-wrap w">
+    <%= require('html-loader!./layout/nav-side.html')%>
+    <div class="content with-nav">
+        test
+        <!--                <%= require('html-loader!./layout/header.html')%>-->
+    </div>
+</div>
+<%= require('html-loader!./layout/footer.html')%>
+</body>
+</html>
