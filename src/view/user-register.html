@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!./layout/head-common.html')%>
+    <title><%= htmlWebpackPlugin.options.title%></title>
+</head>
+<body>
+<%= require('html-loader!./layout/nav-simple.html')%>
+<div class="page-wrap">
+    <div class="w">
+        <div class="user-con">
+            <div class="user-title">User Register</div>
+            <div class="user-box">
+                <div class="error-item">
+                    <i class="fa fa-minus-circle error-icon"></i>
+                    <p class="err-msg">Error</p>
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="username">
+                        <i class="fa fa-user"></i>
+                    </babel>
+                    <input type="text" class="user-content" id="username" placeholder="username" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="password">
+                        <i class="fa fa-lock"></i>
+                    </babel>
+                    <input type="password" class="user-content" id="password" placeholder="password" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="password-confirm">
+                        <i class="fa fa-lock"></i>
+                    </babel>
+                    <input type="password" class="user-content" id="password-confirm" placeholder="confirm password" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="phone">
+                        <i class="fa fa-phone"></i>
+                    </babel>
+                    <input type="text" class="user-content" id="phone" placeholder="phone" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="email">
+                        <i class="fa fa-envelope"></i>
+                    </babel>
+                    <input type="text" class="user-content" id="email" placeholder="email" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="question">
+                        <i class="fa fa-question"></i>
+                    </babel>
+                    <input type="text" class="user-content" id="question" placeholder="question for password reset" autocomplete="off">
+                </div>
+                <div class="user-item">
+                    <babel class="user-label" for="answer">
+                        <i class="fa fa-key"></i>
+                    </babel>
+                    <input type="text" class="user-content" id="answer" placeholder="answer for question" autocomplete="off">
+                </div>
+                <a href="javascript:;" class="btn btn-submit" id="submit">Register</a>
+                <div class="link-item">
+                    <a href="./user-login.html" class="link" target="_blank">Have account, go to login>></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<%= require('html-loader!./layout/footer.html')%>
+</body>
+</html>
