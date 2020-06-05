@@ -8,7 +8,7 @@ let navSide = {
         navList:[
             {name:'user-center',desc:'user center',href:'./user-center.html'},
             {name:'order-list',desc:'my order',href:'./order-list.html'},
-            {name:'pass-update',desc:'change password',href:'./pass-update.html'},
+            {name:'user-pass-update',desc:'change password',href:'./user-pass-update.html'},
             {name:'about',desc:'about mall',href:'./about.html'}
         ]
     },
