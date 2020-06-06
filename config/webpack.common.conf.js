@@ -12,7 +12,7 @@ function resolve(dir){
 }
 
 // get html-webpack-plugin params
-var getHtmlConfig = function(name, title){
+let getHtmlConfig = function(name, title){
     return {
         template    : './src/view/' + name + '.html',
         filename    : 'view/' + name + '.html',
@@ -87,7 +87,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|jpeg)$/,
                 use: [
                     {
-                        loader: "file-loader",
+                        loader: "url-loader",
                         options: {
                             limit: 8192,
                             name:'[hash][name].[ext]',
@@ -103,7 +103,7 @@ module.exports = {
                 test: /\.(eot|svg|tff|woff|woff2|otf|ttf)$/i,
                 use: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             limit: 8192,
                             name:'[hash][name].[ext]',
@@ -125,10 +125,10 @@ module.exports = {
                 test: /\.string$/,
                 loader: 'html-loader'
             },
-            {
-                test: /\.(htm|html)$/i,
-                use:[ 'html-withimg-loader']
-            }
+            // {
+            //     test: /\.(htm|html)$/i,
+            //     use:[ 'html-withimg-loader']
+            // }
 
             // {
             //     test: /\.(html)$/,

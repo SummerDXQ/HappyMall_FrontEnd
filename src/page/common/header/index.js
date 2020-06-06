@@ -19,7 +19,8 @@ let header = {
             that.searchSubmit();
         })
         // press return to submit
-        $('#search-btn').keyup(function (e) {
+        $('#search-input').keyup(function (e) {
+            console.log('回车');
             if(e.keyCode === 13){
                 that.searchSubmit();
             }

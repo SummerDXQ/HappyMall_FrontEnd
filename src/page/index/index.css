@@ -34,6 +34,32 @@
 .banner-con .loading{
     margin-top: 150px;
 }
+.banner-con .banner-img{
+    width: 100%;
+    height: 370px;
+}
+/* banner pre and next indicator*/
+.banner-con .banner-arrow{
+    position: absolute;
+    top: 160px;
+    width: 30px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
+    background: #ccc;
+    background: rgba(0,0,0,.2);
+}
+.banner-con .banner-arrow:hover{
+    background: #aaa;
+    background: rgba(0,0,0,.5);
+}
+.banner-con .banner-arrow.prev{
+    left: 0;
+}
+.banner-con .banner-arrow.next{
+    right: 0;
+}
 /* floor */
 .floor-wrap .floor-title{
     height: 50px;
