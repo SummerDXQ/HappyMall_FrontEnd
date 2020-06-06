@@ -85,14 +85,18 @@ module.exports = {
             // for images
             {
                 test: /\.(png|jpg|gif|jpeg)$/,
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        limit: 8192,
-                        name:'[hash][name].[ext]',
-                        outputPath:'./img'
-                    }
-                }],
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            limit: 8192,
+                            name:'[hash][name].[ext]',
+                            outputPath:'./img',
+                            esModule: false,
+                        },
+
+                    },
+                ],
             },
             // for fonts
             {
@@ -121,6 +125,28 @@ module.exports = {
                 test: /\.string$/,
                 loader: 'html-loader'
             },
+            {
+                test: /\.(htm|html)$/i,
+                use:[ 'html-withimg-loader']
+            }
+
+            // {
+            //     test: /\.(html)$/,
+            //     use: {
+            //         loader: 'html-loader',
+            //         options: {
+            //             attributes:{
+            //                 list:[
+            //                     {
+            //                         tag:'img',
+            //                         attribute:'src',
+            //                         type:'src'
+            //                     }
+            //                 ]
+            //             }
+            //         }
+            //     }
+            // }
         ]
     },
     plugins: [
