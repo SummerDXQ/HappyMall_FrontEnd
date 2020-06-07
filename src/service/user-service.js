@@ -74,7 +74,7 @@ var _user = {
             error   : reject
         });
     },
-    // 获取用户信息
+    // Get user information
     getUserInfo : function(resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/get_information.do'),
@@ -83,7 +83,7 @@ var _user = {
             error   : reject
         });
     },
-    // 更新个人信息
+    // Update user information
     updateUserInfo : function(userInfo, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/update_information.do'),
@@ -93,7 +93,7 @@ var _user = {
             error   : reject
         });
     },
-    // 登录状态下更新密码
+    // update password
     updatePassword : function(userInfo, resolve, reject){
         _mm.request({
             url     : _mm.getServerUrl('/user/reset_password.do'),

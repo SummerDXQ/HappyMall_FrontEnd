@@ -30,7 +30,9 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^6.0.0",
     "happypack": "^5.0.1",
+    "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "html-withimg-loader": "^0.1.16",
     "less": "^3.11.2",
     "less-loader": "^6.1.0",
     "node-sass": "^4.14.1",
@@ -38,6 +40,7 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
@@ -45,9 +48,7 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "hogan": "^1.0.2",
-    "html-loader": "^1.1.0",
-    "url-loader": "^4.1.0"
+    "hogan": "^1.0.2"
   },
   "browserslist": [
     "ie >= 8",

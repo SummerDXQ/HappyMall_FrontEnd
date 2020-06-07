@@ -12,7 +12,7 @@ module.exports = merge(common,
             hot:true,
             hotOnly:true,
             proxy: {
-                '/product/list.do': {
+                '/product/': {
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },

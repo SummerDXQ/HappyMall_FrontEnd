@@ -12,7 +12,7 @@ function resolve(dir){
 }
 
 // get html-webpack-plugin params
-var getHtmlConfig = function(name, title){
+let getHtmlConfig = function(name, title){
     return {
         template    : './src/view/' + name + '.html',
         filename    : 'view/' + name + '.html',
@@ -26,10 +26,12 @@ var getHtmlConfig = function(name, title){
 module.exports = {
     entry: {
         'index':'./src/page/index/index.js',
+        'list':'./src/page/list/index.js',
         'common':'./src/page/common/index.js',
         'user-login':'./src/page/user-login/index.js',
         'user-register':'./src/page/user-register/index.js',
         'user-pass-reset':'./src/page/user-pass-reset/index.js',
+        'user-pass-update':'./src/page/user-pass-update/index.js',
         'user-center':'./src/page/user-center/index.js',
         'user-center-update':'./src/page/user-center-update/index.js',
         'result':'./src/page/result/index.js',
@@ -84,21 +86,25 @@ module.exports = {
             // for images
             {
                 test: /\.(png|jpg|gif|jpeg)$/,
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        limit: 8192,
-                        name:'[hash][name].[ext]',
-                        outputPath:'./img'
-                    }
-                }],
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 8192,
+                            name:'[hash][name].[ext]',
+                            outputPath:'./img',
+                            esModule: false,
+                        },
+
+                    },
+                ],
             },
             // for fonts
             {
                 test: /\.(eot|svg|tff|woff|woff2|otf|ttf)$/i,
                 use: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             limit: 8192,
                             name:'[hash][name].[ext]',
@@ -120,6 +126,28 @@ module.exports = {
                 test: /\.string$/,
                 loader: 'html-loader'
             },
+            // {
+            //     test: /\.(htm|html)$/i,
+            //     use:[ 'html-withimg-loader']
+            // }
+
+            // {
+            //     test: /\.(html)$/,
+            //     use: {
+            //         loader: 'html-loader',
+            //         options: {
+            //             attributes:{
+            //                 list:[
+            //                     {
+            //                         tag:'img',
+            //                         attribute:'src',
+            //                         type:'src'
+            //                     }
+            //                 ]
+            //             }
+            //         }
+            //     }
+            // }
         ]
     },
     plugins: [
@@ -138,10 +166,12 @@ module.exports = {
         //     hash:true
         // }),
         new HtmlWebpackPlugin(getHtmlConfig('index', 'Home Page')),
+        new HtmlWebpackPlugin(getHtmlConfig('list', 'Product List')),
         new HtmlWebpackPlugin(getHtmlConfig('result', 'Result Page')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', 'User Login')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', 'User Register')),
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', 'Password Reset')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', 'Password Update')),
         new HtmlWebpackPlugin(getHtmlConfig('user-center', 'User Center')),
         new HtmlWebpackPlugin(getHtmlConfig('user-center-update', 'Update Profile')),
         new ExtractTextPlugin('./css/[name].css'),
