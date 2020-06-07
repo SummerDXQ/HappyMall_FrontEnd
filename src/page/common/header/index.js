@@ -3,9 +3,10 @@ let _hm = require('util/hm.js');
 let header = {
     init:function () {
         this.bindEvent();
+        this.onload();
     },
     onload:function () {
-        let keyword = _mm.getUrlParam('keyword');
+        let keyword = _hm.getUrlParam('keyword');
         if(keyword){
             // set input value
             $('#search-input').val(keyword)

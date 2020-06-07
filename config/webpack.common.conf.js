@@ -26,6 +26,7 @@ let getHtmlConfig = function(name, title){
 module.exports = {
     entry: {
         'index':'./src/page/index/index.js',
+        'list':'./src/page/list/index.js',
         'common':'./src/page/common/index.js',
         'user-login':'./src/page/user-login/index.js',
         'user-register':'./src/page/user-register/index.js',
@@ -165,6 +166,7 @@ module.exports = {
         //     hash:true
         // }),
         new HtmlWebpackPlugin(getHtmlConfig('index', 'Home Page')),
+        new HtmlWebpackPlugin(getHtmlConfig('list', 'Product List')),
         new HtmlWebpackPlugin(getHtmlConfig('result', 'Result Page')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', 'User Login')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', 'User Register')),
