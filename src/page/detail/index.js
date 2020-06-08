@@ -21,7 +21,36 @@ let page = {
     },
     bindEvent:function () {
         let that = this;
-
+        // change product quantity
+        $(document).on('click', '.p-count-btn', function(){
+            let type        = $(this).hasClass('plus') ? 'plus' : 'minus';
+            let $pCount     = $('.p-count');
+            let currCount   = parseInt($pCount.val());
+            let minCount    = 1;
+            let maxCount    = that.data.detailInfo.stock || 1;
+            if(type === 'plus'){
+                $pCount.val(currCount < maxCount ? currCount + 1 : maxCount);
+            }
+            else if(type === 'minus'){
+                $pCount.val(currCount > minCount ? currCount - 1 : minCount);
+            }
+        });
+        // add to shopping cart
+        $(document).on('click', '.cart-add', function(){
+            if(that.data.detailInfo.stock === 0){
+                _hm.errorTips('There is no stock for this product');
+                return;
+            }
+            _cart.addToCart({
+                productId   : that.data.productId,
+                count       : $('.p-count').val()
+            }, function(res){
+                // console.log(res);
+                window.location.href = './result.html?type=cart-add';
+            }, function(errMsg){
+                _hm.errorTips(errMsg);
+            });
+        });
     },
     // load product detail
     loadDetail:function () {
@@ -31,7 +60,8 @@ let page = {
         $pageWrap.html('<div class="loading"></div>')
         _product.getProductDetail(this.data.productId,function (res) {
             that.filter(res);
-            console.log(res);
+            // store product detail information
+            that.data.detailInfo = res;
             // thumb images
             let thumbImageHtml = res.subImages.map((index,item)=>{
                 return(
@@ -73,7 +103,7 @@ let page = {
                             <span class="p-count-btn minus">-</span>
                         </div>
                         <div class="p-info-item">
-                            <a href="" class="btn cart-add">Add to Cart</a>
+                            <a href="javascript:;" class="btn cart-add">Add to Cart</a>
                         </div>
                     </div>
                 </div>

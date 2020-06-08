@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!./layout/head-common.html')%>
+    <title><%= htmlWebpackPlugin.options.title%></title>
+</head>
+<body>
+<%= require('html-loader!./layout/nav.html')%>
+<%= require('html-loader!./layout/header.html')%>
+<div class="crumb">
+    <div class="w">
+        <div class="crumb-con">
+            <a href="./index.html" class="link">HMall</a>
+            <span>></span>
+            <span class="link-text"><%= htmlWebpackPlugin.options.title%></span>
+        </div>
+    </div>
+</div>
+<div class="page-wrap w">
+<!--    <div class="cart-header">-->
+<!--        <table class="cart-table">-->
+<!--            <tr>-->
+<!--                <th class="cart-cell cell-check">-->
+<!--                    <label class="cart-label">-->
+<!--                        <input type="checkbox" class="cart-select-all">-->
+<!--                        <span>Select all</span>-->
+<!--                    </label>-->
+<!--                </th>-->
+<!--                <th class="cart-cell cell-info">Product Information</th>-->
+<!--                <th class="cart-cell cell-price">Price</th>-->
+<!--                <th class="cart-cell cell-count">Quantity</th>-->
+<!--                <th class="cart-cell cell-total">Total</th>-->
+<!--                <th class="cart-cell cell-opera">Operation</th>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    <div class="cart-list">-->
+<!--        <table class="cart-table">-->
+<!--            <tr>-->
+<!--                <td class="cart-cell cell-check">-->
+<!--                    <label class="cart-label">-->
+<!--                        <input type="checkbox" class="cart-select">-->
+<!--                    </label>-->
+<!--                </td>-->
+<!--                <td class="cart-cell cell-img">-->
+<!--                    <img src="http://img.happymmall.com/da642bb5-5f95-4263-aa05-9bc856125cec.jpg" alt="" class="p-img"/>-->
+<!--                </td>-->
+<!--                <td class="cart-cell cell-info">-->
+<!--                    <a href="./detail.html?productId=" class="link">XXX</a>-->
+<!--                </td>-->
+<!--                <td class="cart-cell cell-price">$111</td>-->
+<!--                <td class="cart-cell cell-count">-->
+<!--                    <span class="count-btn minus">-</span>-->
+<!--                    <input type="text" class="count-input">-->
+<!--                    <span class="count-btn plus">+</span>-->
+<!--                </td>-->
+<!--                <td class="cart-cell cell-total">$222</td>-->
+<!--                <td class="cart-cell cell-opera">-->
+<!--                    <span class="link cart-delete">Operation</span>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    <div class="cart-footer">-->
+<!--        <div class="select-con">-->
+<!--            <label>-->
+<!--                <input type="checkbox" class="cart-select-all">-->
+<!--                <span>Select all</span>-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <div class="delete-con">-->
+<!--            <span class="link">-->
+<!--                <i class="fa fa-trash-o"></i>-->
+<!--                <span>Delete</span>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--        <div class="submit-con">-->
+<!--            <span>Total price:</span>-->
+<!--            <span class="submit-total">$222</span>-->
+<!--            <span class="btn btn-submit">Check out</span>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+<%= require('html-loader!./layout/footer.html')%>
+</body>
+</html>
