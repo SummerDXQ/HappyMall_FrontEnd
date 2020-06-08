@@ -45,7 +45,6 @@ let page = {
                 productId   : that.data.productId,
                 count       : $('.p-count').val()
             }, function(res){
-                // console.log(res);
                 window.location.href = './result.html?type=cart-add';
             }, function(errMsg){
                 _hm.errorTips(errMsg);

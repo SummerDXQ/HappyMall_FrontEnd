@@ -1,13 +1,11 @@
 require('./index.css');
-require('page/common/nav/index.js');
 require('page/common/header/index.js');
+let nav = require('page/common/nav/index.js');
 let _hm = require('util/hm.js');
 let _cart = require('service/cart-service.js');
 
 let page = {
-    data:{
-
-    },
+    data:{},
     init:function () {
         this.onload();
         this.bindEvent();
@@ -16,20 +14,134 @@ let page = {
         this.loadCart();
     },
     bindEvent:function () {
-        // let that = this;
+        let that = this;
+        // select or deselect product
+        $(document).on('click','.cart-select',function () {
+            let $this = $(this);
+            let productId = $this.parents('.cart-table').data('product-id');
+            // change select status
+            if($this.is(':checked')){
+                _cart.selectProduct(productId,function (res) {
+                    that.renderCart(res);
+                },function (errMsg) {
+                    that.showCartError();
+                })
+            }else {
+                _cart.unselectProduct(productId,function (res) {
+                    that.renderCart(res);
+                },function (errMsg) {
+                    that.showCartError();
+                })
+            }
+        })
+        // select all or deselect all
+        $(document).on('click','.cart-select-all',function () {
+            let $this = $(this);
+            // select all
+            if($this.is(':checked')){
+                _cart.selectAllProduct(function (res) {
+                    that.loadCart(res);
+                },function (errMsg) {
+                    that.showCartError();
+                })
+            }
+            // deselect all
+            else {
+                _cart.unselectAllProduct(function (res) {
+                    that.loadCart(res);
+                },function (errMsg) {
+                    that.showCartError();
+                })
+            }
+        })
+        // change product quantity
+        $(document).on('click','.count-btn',function () {
+            let $this = $(this);
+            let $pCount = $this.siblings('.count-input');
+            let currentCount = parseInt($pCount.val());
+            let type = $this.hasClass('plus')? 'plus' : 'minus';
+            let productId = $this.parents('.cart-table').data('product-id');
+            let minCount = 1;
+            let maxCount = parseInt($pCount.data('max'));
+            let newCount = 0;
+            if(type === 'plus'){
+                if(currentCount >= maxCount){
+                    _hm.errorTips('Quantity is up to limit');
+                    return;
+                }
+                newCount = currentCount + 1;
+            }else if(type === 'minus'){
+                if(currentCount <= minCount){
+                    _hm.errorTips('Quantity has already been 1');
+                    return;
+                }
+                newCount = currentCount - 1;
+            }
+            _cart.updateProduct({
+                productId:productId,
+                count:newCount
+            },function (res) {
+                that.renderCart(res);
+            },function (errMsg) {
+                that.showCartError();
+            })
+        })
+        // delete a product
+        $(document).on('click','.cart-delete',function () {
+            if (window.confirm('Do you want to delete the product?')){
+                let productId = $(this).parents('.cart-table').data('product-id');
+                that.deleteCartProduct(productId)
+            }
+        })
+        // delete selected product
+        $(document).on('click','.delete-selected',function () {
+            if (window.confirm('Do you want to delete the selected product?')){
+                let arrProductIds = [];
+                let $selectedItem = $('.cart-select:checked');
+                // get selected products' id
+                for (let i=0;i<$selectedItem.length;i++){
+                    arrProductIds.push($($selectedItem[i]).parents('.cart-table').data('product-id'));
+                }
+                if (arrProductIds.length){
+                    that.deleteCartProduct(arrProductIds.join(','));
+                }else {
+                    _hm.errorTips('No product has been selected');
+                }
+            }
+        })
+        // checkout
+        $(document).on('click','.btn-submit',function () {
+            if(that.data.cartInfo && that.data.cartInfo.cartTotalPrice>0){
+                window.location.href = './confirm.html';
+            }else {
+                _hm.errorTips('No product has been selected');
+            }
+        });
     },
     // load shopping cart info
     loadCart:function () {
         let that = this;
-        let html = '';
         let $pageWrap = $('.page-wrap');
         // loading
+        $pageWrap.html(`<span class="loading"></span>`);
         // get shopping cart list
         _cart.getCartList(function (res) {
-            if(res.cartProductVoList.length === 0){
-                html = `<p class="err-tip">Your shopping cart is empty,<a href="./index.html" class="err-tip">&nbsp;go to shop!</a></p>`
-            }else {
-                html = `
+            console.log('@@@');
+            console.log(res);
+            that.renderCart(res);
+        },function (errMsg) {
+            html = that.showCartError();
+        })
+    },
+    // render shopping cart html
+    renderCart:function (res) {
+        let html = '';
+        let $pageWrap = $('.page-wrap');
+        this.data.cartInfo = res;
+        if(res.cartProductVoList.length === 0){
+            html = `<p class="err-tip">Your shopping cart is empty,<a href="./index.html" class="err-tip">&nbsp;go to shop!</a></p>`
+        }else {
+            html = `
                     <div class="cart-header">
                         <table class="cart-table">
                             <tr>
@@ -47,11 +159,10 @@ let page = {
                             </tr>
                         </table>
                     </div>
-                    <div class="cart-list">
-                    
+                    <div class="cart-list">           
                     ${
-                        res.cartProductVoList.map((item,index)=>{
-                            return(`
+                    res.cartProductVoList.map((item,index)=>{
+                    return(`
                         <table class="cart-table" data-product-id="${item.productId}">
                             <tr>
                                 <td class="cart-cell cell-check">
@@ -73,14 +184,13 @@ let page = {
                                 </td>
                                 <td class="cart-cell cell-total">$ ${item.productTotalPrice.toFixed(2)}</td>
                                 <td class="cart-cell cell-opera">
-                                    <span class="link cart-delete">Operation</span>
+                                    <span class="link cart-delete">Delete</span>
                                 </td>
                             </tr>
-                        </table>
-                                `
-                            )
-                        })
-                    }
+                        </table>`
+                    )
+                })
+            }
                     </div>
                     <div class="cart-footer">
                         <div class="select-con">
@@ -90,7 +200,7 @@ let page = {
                             </label>
                         </div>
                         <div class="delete-con">
-                            <span class="link">
+                            <span class="link delete-selected">
                                 <i class="fa fa-trash-o"></i>
                                 <span>Delete</span>
                             </span>
@@ -102,16 +212,23 @@ let page = {
                         </div>
                     </div>
                 `;
-            }
-            console.log(res);
-            $pageWrap.html(html);
-        },function (errMsg) {
-            html = `<p class="err-tip">Something wrong!</p>`
-        })
-
+        }
+        $pageWrap.html(html);
+        // change product quantity for navigation
+        nav.loadCartCount();
     },
-    filter:function (data) {
-
+    // show error information
+    showCartError:function () {
+        return `<p class="err-tip">Something wrong!</p>`;
+    },
+    // delete product
+    deleteCartProduct:function (productIds) {
+        let that = this;
+        _cart.deleteProduct(productIds,function (res) {
+            that.renderCart(res);
+        },function (errMsg) {
+            that.showCartError();
+        })
     }
 };
 
