@@ -1,13 +1,14 @@
 require('./index.css');
 let _mm     = require('util/hm.js');
 let _user   = require('service/user-service.js');
+let _cart = require('service/cart-service.js');
 
 // Navigation
 var nav = {
     init : function(){
         this.bindEvent();
         this.loadUserInfo();
-        // this.loadCartCount();
+        this.loadCartCount();
         return this;
     },
     bindEvent : function(){
@@ -36,6 +37,16 @@ var nav = {
         }, function(errMsg){
             // do nothing
         });
+    },
+    // load shopping cart quantity
+    loadCartCount:function () {
+        _cart.getCartCount(function (res) {
+            console.log('quantity');
+            console.log(res);
+            $('.nav .cart-count').text(res || 0);
+        },function (errMsg) {
+            $('.nav .cart-count').text(0);
+        })
     }
 };
 

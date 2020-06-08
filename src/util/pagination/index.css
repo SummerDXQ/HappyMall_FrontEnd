@@ -11,7 +11,10 @@
     border: 1px solid #ccc;
     background: #eee;
     cursor: pointer;
-    /*user-select: none ;*/
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .pg-content .pg-item.disabled{
     color: #ccc;
@@ -22,4 +25,22 @@
     border: 1px solid #f6f6f6;
     background: none;
     cursor: auto;
+}
+/* product detail */
+.detail-wrap{
+    margin-top: 15px;
+}
+.detail-wrap .tab-list{
+    background: #eee;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.detail-wrap .tab-list .tab-item{
+    float: left;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
 }

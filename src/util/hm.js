@@ -5,6 +5,7 @@ let conf = {
 let _hm = {
     // request data
     request:function (param) {
+        let that = this;
         $.ajax({
             type:param.method || 'get',
             url: param.url || '',
@@ -15,9 +16,9 @@ let _hm = {
                 if(res.status === 0){
                     typeof param.success === 'function' && param.success(res.data)
                 }
-                // haven't user-login
+                // haven't login
                 else if(res.status === 10){
-                    this.doLogin();
+                    that.doLogin();
                 }
                 else if(res.status === 1){
                     typeof param.success === 'function' && param.error(res.msg)

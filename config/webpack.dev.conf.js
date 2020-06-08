@@ -20,6 +20,10 @@ module.exports = merge(common,
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },
+                '/cart/': {
+                    target: 'http://admintest.happymmall.com',
+                    changeOrigin: true
+                },
             }
         },
         plugins: [
