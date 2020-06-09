@@ -24,6 +24,14 @@ module.exports = merge(common,
                     target: 'http://admintest.happymmall.com',
                     changeOrigin: true
                 },
+                '/order/': {
+                    target: 'http://admintest.happymmall.com',
+                    changeOrigin: true
+                },
+                '/shipping/': {
+                    target: 'http://admintest.happymmall.com',
+                    changeOrigin: true
+                },
             }
         },
         plugins: [
