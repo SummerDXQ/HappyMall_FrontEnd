@@ -112,7 +112,7 @@ let page = {
         // checkout
         $(document).on('click','.btn-submit',function () {
             if(that.data.cartInfo && that.data.cartInfo.cartTotalPrice>0){
-                window.location.href = './confirm.html';
+                window.location.href = './order-confirm.html';
             }else {
                 _hm.errorTips('No product has been selected');
             }
