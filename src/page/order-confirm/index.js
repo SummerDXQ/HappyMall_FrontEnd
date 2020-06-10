@@ -35,7 +35,7 @@ let page = {
                 },function (res) {
                     window.location.href = './payment.html?orderNumber='+ res.orderNo;
                 },function (errMsg) {
-
+                    _hm.errorTips(errMsg);
                 })
             }else {
                 _hm.errorTips('Please select address before submitting order!')
@@ -50,14 +50,51 @@ let page = {
                 }
             })
         })
+        $(document).on('click','.address-update',function () {
+            let shippingId = $(this).parents('.address-item').data('id');
+            _address.getAddress(shippingId,function (res) {
+                addressModal.show({
+                    isUpdate:true,
+                    data:res,
+                    onSuccess:function () {
+                        that.loadAddressList()
+                    }
+                })
+            },function (errMsg) {
+                _hm.errorTips(errMsg);
+            })
+        })
     },
     // load address list
     loadAddressList:function () {
         let that = this;
         _address.getAddressList(function (res) {
-            // that.renderCart(res);
-            // let AddressListHtml = '';
-            // $('.address-con').html(AddressListHtml)
+            let AddressListHtml = ``;
+            res.list.map((item,index)=>{
+                AddressListHtml += `
+                            <div class="address-item" data-id="${item.id}">
+                                <div class="address-title">
+                                    ${item.receiverProvince} ${item.receiverCity} (${item.receiverName})
+                                </div>
+                                <div class="address-detail">
+                                    ${item.receiverAddress} ${item.receiverPhone}
+                                </div>
+                                <div class="address-opera">
+                                    <span class="link address-update">Edit</span>
+                                    <span class="link address-delete">Delete</span>
+                                </div>
+                            </div>
+                            `
+            })
+            AddressListHtml +=`
+                            <div class="address-add">
+                                <div class="address-new">
+                                    <i class="fa fa-plus"></i>
+                                    <div class="text">Use new address</div>
+                                </div>
+                            </div>
+                            `
+            $('.address-con').html(AddressListHtml);
         },function (errMsg) {
             $('.address-con').html(`<p class="err-tip">Loading address failed, please try again!</p>`)
         })
