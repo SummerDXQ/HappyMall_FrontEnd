@@ -55,8 +55,6 @@ let page = {
     loadAddressList:function () {
         let that = this;
         _address.getAddressList(function (res) {
-            console.log('Address')
-            console.log(res);
             // that.renderCart(res);
             // let AddressListHtml = '';
             // $('.address-con').html(AddressListHtml)
@@ -68,8 +66,6 @@ let page = {
     loadProductList:function () {
         let that = this;
         _order.getProductList(function (res) {
-            console.log('Product')
-            console.log(res);
             // that.renderCart(res);
             // let ProductListHtml = '';
             // $('.product-con').html(ProductListHtml)
