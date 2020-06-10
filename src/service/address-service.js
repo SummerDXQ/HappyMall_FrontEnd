@@ -39,5 +39,14 @@ var _address = {
             error   : reject
         });
     },
+    // delete address
+    deleteAddress:function(shippingId,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/shipping/del.do'),
+            data    : {shippingId:shippingId},
+            success : resolve,
+            error   : reject
+        });
+    },
 }
 module.exports = _address;

@@ -50,7 +50,8 @@ let page = {
                 }
             })
         })
-        $(document).on('click','.address-update',function () {
+        $(document).on('click','.address-update',function (e) {
+            e.stopPropagation();
             let shippingId = $(this).parents('.address-item').data('id');
             _address.getAddress(shippingId,function (res) {
                 addressModal.show({
@@ -64,15 +65,29 @@ let page = {
                 _hm.errorTips(errMsg);
             })
         })
+        $(document).on('click','.address-delete',function (e) {
+            e.stopPropagation();
+            let id = $(this).parents('.address-item').data('id');
+            if(window.confirm('Do you want to delete?')){
+                _address.deleteAddress(id,function (res) {
+                    that.loadAddressList();
+                },function (errMsg) {
+                    _hm.errorTips(errMsg);
+                })
+            }
+        })
     },
     // load address list
     loadAddressList:function () {
         let that = this;
         _address.getAddressList(function (res) {
+            that.addressFilter(res);
+            console.log('filter');
+            console.log(res);
             let AddressListHtml = ``;
             res.list.map((item,index)=>{
                 AddressListHtml += `
-                            <div class="address-item" data-id="${item.id}">
+                            <div class="address-item ${item.isActive? 'active' : ''}" data-id="${item.id}">
                                 <div class="address-title">
                                     ${item.receiverProvince} ${item.receiverCity} (${item.receiverName})
                                 </div>
@@ -110,6 +125,22 @@ let page = {
             $('.product-con ').html(`<p class="err-tip">Loading product list failed, please try again!</p>`)
         })
     },
+    // address list's selected status
+    addressFilter:function (data) {
+        if(this.data.selectedAddressId){
+            let selectedAddressIdFlag = false;
+            for (let i=0,length=data.list.length;i<length;i++){
+                if(data.list[i].id === this.data.selectedAddressId){
+                    data.list[i].isActive = true;
+                    selectedAddressIdFlag = true;
+                }
+            }
+            // selected address has been removed
+            if(!selectedAddressIdFlag){
+                this.data.selectedAddressId = null;
+            }
+        }
+    }
 };
 
 $(function () {
