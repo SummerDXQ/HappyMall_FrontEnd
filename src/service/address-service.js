@@ -12,5 +12,41 @@ var _address = {
             error   : reject
         });
     },
+    // add new address
+    save : function(addressInfo,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/shipping/add.do'),
+            data    : addressInfo,
+            success : resolve,
+            error   : reject
+        });
+    },
+    // update address
+    update : function(addressInfo,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/shipping/update.do'),
+            data    : addressInfo,
+            success : resolve,
+            error   : reject
+        });
+    },
+    // get specific address info
+    getAddress : function(shippingId,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/shipping/select.do'),
+            data    : {shippingId:shippingId},
+            success : resolve,
+            error   : reject
+        });
+    },
+    // delete address
+    deleteAddress:function(shippingId,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/shipping/del.do'),
+            data    : {shippingId:shippingId},
+            success : resolve,
+            error   : reject
+        });
+    },
 }
 module.exports = _address;
