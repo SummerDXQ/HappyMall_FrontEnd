@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!./layout/head-common.html')%>
+    <title><%= htmlWebpackPlugin.options.title%></title>
+</head>
+<body>
+<%= require('html-loader!./layout/nav.html')%>
+<%= require('html-loader!./layout/header.html')%>
+<div class="crumb">
+    <div class="w">
+        <div class="crumb-con">
+            <a href="./index.html" class="link">HMall</a>
+            <span>></span>
+            <span class="link-text"><%= htmlWebpackPlugin.options.title%></span>
+        </div>
+    </div>
+</div>
+<div class="page-wrap w">
+    <%= require('html-loader!./layout/nav-side.html')%>
+    <div class="content with-nav">
+        <div class="panel">
+            <div class="panel-title">Order List</div>
+            <div class="panel-body">
+                <div class="order-list-con">
+<!--                    <table class="order-list-table header">-->
+<!--                        <tr>-->
+<!--                            <th class="cell cell-img">&nbsp;</th>-->
+<!--                            <th class="cell cell-info">Product</th>-->
+<!--                            <th class="cell cell-price">Price</th>-->
+<!--                            <th class="cell cell-count">Quantity</th>-->
+<!--                            <th class="cell cell-total">Total</th>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <table class="order-list-table order-item">-->
+<!--                        <tr>-->
+<!--                            <td colspan="5" class="order-info">-->
+<!--                                <span class="order-text">-->
+<!--                                    <span>Oder Number:</span>-->
+<!--                                    <a href="./order-detail.html?orderNumber=111" class="link order-num">111</a>-->
+<!--                                </span>-->
+<!--                                <span class="order-text">2020-6-1</span>-->
+<!--                                <span class="order-text">Receiver</span>-->
+<!--                                <span class="order-text">Order Status:XXX</span>-->
+<!--                                <span class="order-text">-->
+<!--                                    <span>Total Price:</span>-->
+<!--                                    <span class="order-total">$XXX</span>-->
+<!--                                </span>-->
+<!--                                <a href="./order-detail.html?orderNumber=XXX" class="link order-detail">Detail ></a>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td class="cell cell-img">-->
+<!--                                <a href="./detail.html?productId=XXX" target="_blank">-->
+<!--                                    <img src="http://img.happymmall.com/da642bb5-5f95-4263-aa05-9bc856125cec.jpg" alt="" class="p-img">-->
+<!--                                </a>-->
+<!--                            </td>-->
+<!--                            <td class="cell cell-info">-->
+<!--                                <a class="link" href="./detail.html?productId=XXX" target="_blank">-->
+<!--                                    XXX-->
+<!--                                </a>-->
+<!--                            </td>-->
+<!--                            <td class="cell cell-price">$111</td>-->
+<!--                            <td class="cell cell-count">2</td>-->
+<!--                            <td class="cell cell-total">$345</td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+                </div>
+                <div class="pagination">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%= require('html-loader!./layout/footer.html')%>
+</body>
+</html>
