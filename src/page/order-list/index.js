@@ -2,7 +2,7 @@ import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
 require('./index.css');
 let navSide = require('page/common/nav-side/index.js');
-let _mm = require('util/hm.js');
+let _hm = require('util/hm.js');
 let _order = require('service/order-service.js');
 let Pagination = require('util/pagination/index.js');
 
@@ -54,7 +54,7 @@ let page = {
                             <td colspan="5" class="order-info">
                                 <span class="order-text">
                                     <span>Oder Number:</span>
-                                    <a href="./order-detail.html?orderNumber=${item.orderNo}" class="link order-num">${item.orderNo}</a>
+                                    <a href="./order-detail.html?orderNum dber=${item.orderNo}" class="link order-num">${item.orderNo}</a>
                                 </span>
                                 <span class="order-text">${item.createTime}</span>
                                 <span class="order-text">Receiver: ${item.receiverName}</span>
@@ -62,8 +62,8 @@ let page = {
                                 <span class="order-text">
                                     <span>Total Price:</span>
                                     <span class="order-total">${item.payment}</span>
-                                </span>
-                                <a href="./order-detail.html?orderNumber=XXX" class="link order-detail">Detail ></a>
+                                </span> 
+                                <a href="./order-detail.html?orderNumber=${item.orderNo}" class="link order-detail">Detail ></a>
                             </td>
                         </tr>`;
                 item.orderItemVoList.map((subitem,index)=>{
