@@ -18,5 +18,36 @@ var _cart = {
             error   : reject
         });
     },
+    // request order list
+    getOrderList:function(listParam,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/order/list.do'),
+            data    : listParam,
+            success : resolve,
+            error   : reject
+        });
+    },
+    // request order detail
+    getOrderDetail:function(orderNumber,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/order/detail.do'),
+            data    : {
+                orderNo:orderNumber
+            },
+            success : resolve,
+            error   : reject
+        });
+    },
+    // cancel order
+    cancelOrder:function(orderNumber,resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/order/cancel.do'),
+            data    : {
+                orderNo:orderNumber
+            },
+            success : resolve,
+            error   : reject
+        });
+    }
 }
 module.exports = _cart;
