@@ -1,10 +1,6 @@
 const path = require('path');
-// const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HappyPack = require('happypack');
 
 function resolve(dir){
@@ -32,6 +28,7 @@ module.exports = {
         'cart':'./src/page/cart/index.js',
         'order-confirm':'./src/page/order-confirm/index.js',
         'order-detail':'./src/page/order-detail/index.js',
+        'payment':'./src/page/payment/index.js',
         'order-list':'./src/page/order-list/index.js',
         'user-login':'./src/page/user-login/index.js',
         'user-register':'./src/page/user-register/index.js',
@@ -44,7 +41,6 @@ module.exports = {
     output: {
         path: path.resolve(__dirname,'../dist'),
         filename: "js/[name].js",
-        // filename: "js/[name][hash].js",
         publicPath: "/dist"
     },
     resolve: {
@@ -131,45 +127,9 @@ module.exports = {
                 test: /\.string$/,
                 loader: 'html-loader'
             },
-            // {
-            //     test: /\.(htm|html)$/i,
-            //     use:[ 'html-withimg-loader']
-            // }
-
-            // {
-            //     test: /\.(html)$/,
-            //     use: {
-            //         loader: 'html-loader',
-            //         options: {
-            //             attributes:{
-            //                 list:[
-            //                     {
-            //                         tag:'img',
-            //                         attribute:'src',
-            //                         type:'src'
-            //                     }
-            //                 ]
-            //             }
-            //         }
-            //     }
-            // }
         ]
     },
     plugins: [
-        // new HtmlWebpackPlugin({
-        //     template: "./src/view/index.html",
-        //     filename: "index.html",
-        //     minify:{
-        //         minimize:true,
-        //         removeComments:true,
-        //         removeAttributeQuotes:true,
-        //         collapseWhitespace:true,
-        //         minifyCSS:true,
-        //         minifyJS:true,
-        //         removeEmptyElements:true
-        //     },
-        //     hash:true
-        // }),
         new HtmlWebpackPlugin(getHtmlConfig('index', 'Home Page')),
         new HtmlWebpackPlugin(getHtmlConfig('list', 'Product List')),
         new HtmlWebpackPlugin(getHtmlConfig('detail', 'Product Detail')),
@@ -178,6 +138,7 @@ module.exports = {
         new HtmlWebpackPlugin(getHtmlConfig('order-confirm', 'Order Confirm')),
         new HtmlWebpackPlugin(getHtmlConfig('order-list', 'Order List')),
         new HtmlWebpackPlugin(getHtmlConfig('order-detail', 'Order Detail')),
+        new HtmlWebpackPlugin(getHtmlConfig('payment', 'Order Payment')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', 'User Login')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', 'User Register')),
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', 'Password Reset')),
