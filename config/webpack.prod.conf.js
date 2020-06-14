@@ -17,14 +17,14 @@ module.exports = merge(common,{
                 },
                 canPrint:true
             }),
-            new CopyWebpackPlugin({
-                patterns: [
-                    {
-                        from: path.resolve(__dirname,'../public/assets'),
-                        to: path.resolve(__dirname,'../build/assets')
-                    },
-                ],
-            }),
+            // new CopyWebpackPlugin({
+            //     patterns: [
+            //         {
+            //             from: path.resolve(__dirname,'../public/assets'),
+            //             to: path.resolve(__dirname,'../build/assets')
+            //         },
+            //     ],
+            // }),
             new CleanWebpackPlugin(),
         ]
     }
