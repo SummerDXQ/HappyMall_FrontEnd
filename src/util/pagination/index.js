@@ -1,4 +1,4 @@
-require('./index.css');
+import './index.css';
 
 let Pagination = function () {
     let that = this;
@@ -76,4 +76,4 @@ Pagination.prototype.getPaginationHTml = function () {
 
 };
 
-module.exports = Pagination;
+export default Pagination;

@@ -1,10 +1,10 @@
-require('./index.css');
-let _mm     = require('util/hm.js');
-let _user   = require('service/user-service.js');
-let _cart = require('service/cart-service.js');
+import './index.css';
+import _hm from "util/hm";
+import _user from "service/user-service";
+import _cart from "service/cart-service";
 
 // Navigation
-var nav = {
+let nav = {
     init : function(){
         this.bindEvent();
         this.loadUserInfo();
@@ -14,7 +14,7 @@ var nav = {
     bindEvent : function(){
         // login
         $('.js-login').click(function(){
-            _mm.doLogin();
+            _hm.doLogin();
         });
         // register
         $('.js-register').click(function(){
@@ -25,7 +25,7 @@ var nav = {
             _user.logout(function(res){
                 window.location.reload();
             }, function(errMsg){
-                _mm.errorTips(errMsg);
+                _hm.errorTips(errMsg);
             });
         });
     },
@@ -50,4 +50,6 @@ var nav = {
     }
 };
 
-module.exports = nav.init();
+// module.exports = nav.init();
+
+export default nav.init();

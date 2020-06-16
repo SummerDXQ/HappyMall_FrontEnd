@@ -1,9 +1,9 @@
 import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
-require('./index.css');
-let navSide = require('page/common/nav-side/index.js');
-let _mm = require('util/hm.js');
-let _user = require('service/user-service.js')
+import './index.css';
+import navSide from "page/common/nav-side";
+import _hm from "util/hm";
+import _user from "service/user-service";
 
 // page logic
 let page = {
@@ -33,12 +33,12 @@ let page = {
                     passwordOld : userInfo.password,
                     passwordNew : userInfo.passwordNew
                 }).then( (res) =>{
-                    _mm.successTips(res);
+                    _hm.successTips(res);
                 }).catch( (errMsg) =>{
-                    _mm.errorTips(errMsg);
+                    _hm.errorTips(errMsg);
                 })
             }else {
-                _mm.errorTips(validateResult.msg);
+                _hm.errorTips(validateResult.msg);
             }
         })
     },
@@ -49,7 +49,7 @@ let page = {
             msg     : ''
         };
         // validate old password
-        if(!_mm.validate(formData.password, 'required')){
+        if(!_hm.validate(formData.password, 'required')){
             result.msg = 'Old password is required';
             return result;
         }

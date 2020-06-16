@@ -1,2 +1,2 @@
-require('page/common/header/index.js');
-require('page/common/nav/index.js');
+import 'page/common/header/index.js';
+import 'page/common/nav/index.js';

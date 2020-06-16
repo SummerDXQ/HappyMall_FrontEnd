@@ -1,4 +1,4 @@
-var _hm = require('util/hm.js');
+import _hm from "util/hm";
 
 var _user = {
     // User login
@@ -90,4 +90,5 @@ var _user = {
         });
     }
 }
-module.exports = _user;
+
+export default _user;

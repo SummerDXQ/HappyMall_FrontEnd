@@ -1,6 +1,6 @@
-var _hm = require('util/hm.js');
+import _hm from "util/hm";
 
-var _cart = {
+let _cart = {
     // get shopping cart quantity
     getCartCount (){
         return _hm.request({
@@ -64,4 +64,5 @@ var _cart = {
 
 
 }
-module.exports = _cart;
+
+export default _cart;

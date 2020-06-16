@@ -1,9 +1,9 @@
-require('./index.css');
-require('page/common/nav/index.js');
-require('page/common/header/index.js');
-let _hm = require('util/hm.js');
-let _product = require('service/product-service.js');
-let _cart = require('service/cart-service.js');
+import './index.css';
+import 'page/common/nav/index.js';
+import 'page/common/header/index.js';
+import _hm from "util/hm";
+import _product from "service/product-service";
+import _cart from "service/cart-service";
 
 let page = {
     data:{

@@ -1,4 +1,4 @@
-var _hm = require('util/hm.js');
+import _hm from "util/hm";
 
 var _payment = {
     // request payment info
@@ -20,4 +20,5 @@ var _payment = {
         });
     },
 }
-module.exports = _payment;
+
+export default _payment;

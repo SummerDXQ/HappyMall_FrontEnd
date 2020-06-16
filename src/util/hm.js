@@ -1,4 +1,3 @@
-let Hogan = require('hogan.js');
 let conf = {
     serverHost : ''
 }
@@ -46,12 +45,6 @@ let _hm = {
         let result = window.location.search.substr(1).match(reg);
         return result ? decodeURIComponent(result[2]) : null;
     },
-    // render html template
-    renderHtml:function (htmlTemplate,data) {
-        let template = Hogan.compile(htmlTemplate);
-        let result = template.render(data);
-        return result;
-    },
     // reminder
     successTips:function (msg) {
         alert(msg || 'Successful');
@@ -77,5 +70,4 @@ let _hm = {
         window.location.href ='./index.html';
     }
 }
-
-module.exports=_hm;
+export default _hm;

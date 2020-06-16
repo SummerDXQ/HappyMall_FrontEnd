@@ -1,10 +1,9 @@
 import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
-require('./index.css');
-let navSide = require('page/common/nav-side/index.js');
-let _hm = require('util/hm.js');
-let _order = require('service/order-service.js');
-let Pagination = require('util/pagination/index.js');
+import './index.css';
+import navSide from 'page/common/nav-side/index.js';
+import _order from "service/order-service";
+import Pagination from "util/pagination";
 
 // page logic
 let page = {

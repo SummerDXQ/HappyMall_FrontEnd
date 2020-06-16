@@ -1,2 +1,2 @@
-require('./index.css');
-require('./unslider.js');
+import './index.css';
+import './unslider';

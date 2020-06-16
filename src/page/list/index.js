@@ -1,10 +1,9 @@
-import 'page/common/header/index.js'
-import 'page/common/nav/index.js'
-require('./index.css');
-let navSide = require('page/common/nav-side/index.js');
-let _hm = require('util/hm.js');
-let Pagination = require('util/pagination/index.js');
-let _product = require('service/product-service.js')
+import 'page/common/header/index.js';
+import 'page/common/nav/index.js';
+import './index.css';
+import _hm from "util/hm";
+import Pagination from "util/pagination";
+import _product from "../../service/product-service";
 
 let page = {
     data:{

@@ -1,6 +1,6 @@
 import './index.css';
 import 'page/common/nav-simple/index.js';
-let _hm = require('util/hm.js');
+import _hm from "util/hm";
 
 $(function () {
     let type = _hm.getUrlParam('type') || 'default';

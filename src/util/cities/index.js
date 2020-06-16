@@ -46,4 +46,4 @@ let _cities = {
     }
 }
 
-module.exports = _cities;
+export default _cities;

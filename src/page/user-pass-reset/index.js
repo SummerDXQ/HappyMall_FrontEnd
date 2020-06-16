@@ -1,7 +1,6 @@
 import './index.css';
 import 'page/common/nav-simple/index.js';
-let _hm = require('util/hm.js');
-let _user = require('service/user-service.js');
+import _user from "service/user-service";
 
 // form error message
 let formError = {

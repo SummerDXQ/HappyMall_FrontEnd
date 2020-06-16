@@ -1,8 +1,8 @@
 import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
-require('./index.css');
-let _hm = require('util/hm.js');
-let _payment = require('service/payment-service.js');
+import './index.css';
+import _hm from "util/hm";
+import _payment from "service/payment-service";
 
 // page logic
 let page = {

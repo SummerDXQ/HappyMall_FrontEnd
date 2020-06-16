@@ -1,4 +1,5 @@
-var _hm = require('util/hm.js');
+// var _hm = require('util/hm.js');
+import _hm from "../util/hm";
 
 var _product = {
     // Request product list
@@ -16,4 +17,5 @@ var _product = {
         });
     },
 }
-module.exports = _product;
+
+export default _product;

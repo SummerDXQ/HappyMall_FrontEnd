@@ -1,5 +1,6 @@
 import './index.css';
-let _hm = require('util/hm.js');
+import _hm from "util/hm";
+
 let header = {
     init:function () {
         this.bindEvent();

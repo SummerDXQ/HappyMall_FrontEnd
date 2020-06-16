@@ -1,10 +1,10 @@
-require('./index.css');
-require('page/common/header/index.js');
-require('page/common/nav/index.js');
-let _hm = require('util/hm.js');
-let _order = require('service/order-service.js');
-let _address = require('service/address-service.js');
-let addressModal = require('./address-modal.js');
+import './index.css';
+import 'page/common/header/index.js';
+import 'page/common/nav/index.js';
+import _hm from "util/hm";
+import _order from "service/order-service";
+import _address from "service/address-service";
+import addressModal from "./address-modal";
 
 let page = {
     data:{
@@ -81,7 +81,7 @@ let page = {
     loadAddressList:function () {
         let that = this;
         $('.address-con').html('<div class="loading"></div>')
-        _address.getAddressList(function (res) {
+        _address.getAddressList().then( (res)=> {
             that.addressFilter(res);
             console.log('filter');
             console.log(res);
@@ -111,14 +111,14 @@ let page = {
                             </div>
                             `
             $('.address-con').html(AddressListHtml);
-        },function (errMsg) {
+        }).catch( (errMsg)=> {
             $('.address-con').html(`<p class="err-tip">Loading address failed, please try again!</p>`)
         })
     },
     // load product list
     loadProductList () {
         $('.product-con').html('<div class="loading"></div>');
-        _order.getProductList
+        _order.getProductList()
             .then (
                 (res)=> {
                     let ProductListHtml = `

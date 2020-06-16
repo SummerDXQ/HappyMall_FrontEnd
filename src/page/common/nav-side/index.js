@@ -1,5 +1,4 @@
-require('./index.css');
-let _hm = require('util/hm.js');
+import './index.css';
 
 // side navigation
 let navSide = {
@@ -12,20 +11,16 @@ let navSide = {
             {name:'about',desc:'about mall',href:'./about.html'}
         ]
     },
-    init:function (option) {
+    init (option) {
         // merge options
         $.extend(this.option,option);
         this.renderNav();
     },
-    renderNav:function () {
+    renderNav () {
         for (let i=0;i<this.option.navList.length;i++){
             if (this.option.navList[i].name === this.option.name){
                 this.option.navList[i].isActive = true;
             }
-            // let navHtml = _hm.renderHtml(templateIndex,{
-            //     navList: this.option.navList
-            // });
-            // $('.nav-side').html(navHtml);
         }
         //render list
         let navHtml = '';
@@ -41,4 +36,5 @@ let navSide = {
         $('.nav-side').html(navHtml);
     }
 }
-module.exports = navSide;
+
+export default navSide;

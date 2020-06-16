@@ -1,9 +1,10 @@
-import 'page/common/header/index.js'
-import 'page/common/nav/index.js'
-require('./index.css');
-let navSide = require('page/common/nav-side/index.js');
-let _mm = require('util/hm.js');
-let _user = require('service/user-service.js')
+import 'page/common/header/index.js';
+import 'page/common/nav/index.js';
+import './index.css';
+import navSide from 'page/common/nav-side/index.js';
+import _hm from "util/hm";
+import _user from "service/user-service";
+
 
 // page logic
 let page = {
@@ -49,7 +50,7 @@ let page = {
                 </div>
             `;
             $('.panel-body').html(userHtml);
-        }).catch( (errMsg)=>_mm.errorTips(errMsg))
+        }).catch( (errMsg)=>_hm.errorTips(errMsg))
     },
     bindEvent:function () {
         let that = this;
@@ -66,14 +67,14 @@ let page = {
                 // edit user information
                 _user.updateUserInfo(userInfo)
                     .then( (res) => {
-                    _mm.successTips(res);
+                        _hm.successTips(res);
                     window.location.href = './user-center.html';
                 })
                     .catch( (errMsg)=> {
-                    _mm.errorTips(errMsg);
+                        _hm.errorTips(errMsg);
                 })
             }else {
-                _mm.errorTips(validateResult.msg);
+                _hm.errorTips(validateResult.msg);
             }
         })
     },
@@ -84,22 +85,22 @@ let page = {
             msg     : ''
         };
         // validate phone number format
-        if(!_mm.validate(formData.phone, 'phone')){
+        if(!_hm.validate(formData.phone, 'phone')){
             result.msg = 'Phone format is not correct';
             return result;
         }
         // validate email format
-        if(!_mm.validate(formData.email, 'email')){
+        if(!_hm.validate(formData.email, 'email')){
             result.msg = 'Email format is not correct';
             return result;
         }
         // validate password reset question
-        if(!_mm.validate(formData.question, 'required')){
+        if(!_hm.validate(formData.question, 'required')){
             result.msg = 'Question is required';
             return result;
         }
         // validate answer
-        if(!_mm.validate(formData.answer, 'required')){
+        if(!_hm.validate(formData.answer, 'required')){
             result.msg = 'Answer is required';
             return result;
         }

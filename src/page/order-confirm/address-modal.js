@@ -1,6 +1,6 @@
-let _hm = require('util/hm.js');
-let _cities = require('util/cities/index.js');
-let _address = require('service/address-service.js');
+import _hm from "util/hm";
+import _cities from "util/cities";
+import _address from "service/address-service";
 
 let addressModal = {
     show:function (option) {
@@ -201,4 +201,5 @@ let addressModal = {
         return result;
     }
 };
-module.exports = addressModal;
+// module.exports = addressModal;
+export default addressModal;

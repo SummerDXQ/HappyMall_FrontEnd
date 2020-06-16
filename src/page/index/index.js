@@ -2,9 +2,9 @@ import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
 import 'util/slider/index.js'
 import './index.css'
-let navSide = require('page/common/nav-side/index.js');
+import navSide from 'page/common/nav-side/index.js';
 import 'page/common/index.js';
-let _mm = require('util/hm.js');
+
 navSide.init({name:'user-center'});
 
 $(function() {

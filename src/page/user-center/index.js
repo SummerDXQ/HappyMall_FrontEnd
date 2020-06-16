@@ -1,9 +1,10 @@
 import 'page/common/header/index.js'
 import 'page/common/nav/index.js'
-require('./index.css');
-let navSide = require('page/common/nav-side/index.js');
-let _mm = require('util/hm.js');
-let _user = require('service/user-service.js')
+import './index.css';
+import navSide from 'page/common/nav-side/index.js';
+import _hm from "util/hm";
+import _user from "service/user-service";
+
 
 // page logic
 let page = {
@@ -49,7 +50,7 @@ let page = {
             `;
             $('.panel-body').html(userHtml);
         })
-            .catch( (errMsg) => _mm.errorTips(errMsg))
+            .catch( (errMsg) => _hm.errorTips(errMsg))
     }
 };
 $(function () {

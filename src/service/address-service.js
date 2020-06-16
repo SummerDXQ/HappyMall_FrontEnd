@@ -1,6 +1,6 @@
-var _hm = require('util/hm.js');
+import _hm from "util/hm";
 
-var _address = {
+let _address = {
     // request address list
     getAddressList (){
         return _hm.request({
@@ -39,4 +39,5 @@ var _address = {
         });
     },
 }
-module.exports = _address;
+
+export default _address;
