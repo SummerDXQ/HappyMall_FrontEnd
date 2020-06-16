@@ -34,11 +34,11 @@ let page = {
             let username =$.trim($('#username').val());
             // input username
             if (username){
-                _user.getQuestion(username,function (res) {
+                _user.getQuestion(username).then( (res) =>{
                     that.data.username = username;
                     that.data.question = res;
                     that.loadStepQuestion();
-                },function (errMsg) {
+                }).catch( (errMsg)=> {
                     formError.show(errMsg);
                 })
             }
@@ -57,11 +57,11 @@ let page = {
                     username:that.data.username,
                     question:that.data.question,
                     answer:answer
-                },function (res) {
+                }).then( (res) =>{
                     that.data.answer = answer;
                     that.data.token = res;
                     that.loadStepPassword();
-                },function (errMsg) {
+                }).catch( (errMsg)=> {
                     formError.show(errMsg);
                 })
             }
@@ -78,9 +78,9 @@ let page = {
                     username:that.data.username,
                     password:password,
                     forgetToken:that.data.token
-                },function (res) {
+                }).then( (res) =>{
                     window.location.href='./result.html?type=pass-reset';
-                },function (errMsg) {
+                }).catch( (errMsg) =>{
                     formError.show(errMsg);
                 })
             }

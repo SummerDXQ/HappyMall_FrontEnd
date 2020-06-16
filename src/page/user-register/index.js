@@ -25,9 +25,9 @@ let page = {
             if (!username){
                 return;
             }
-            _user.checkUsername(username,function () {
+            _user.checkUsername(username).then( () =>{
                 formError.hide();
-            },function (errMsg) {
+            }).catch( (errMsg)=> {
                 formError.show(errMsg);
             })
         })
@@ -58,9 +58,9 @@ let page = {
         let validateResult = that.formValidate(formData);
         // validate success
         if(validateResult.status){
-            _user.register(formData,function (res) {
+            _user.register(formData).then( (res) =>{
                 window.location.href = './result.html?type=register';
-            },function (errMsg) {
+            }).catch( (errMsg) =>{
                 formError.show(errMsg)
             })
         }

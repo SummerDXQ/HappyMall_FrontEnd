@@ -32,9 +32,9 @@ let page = {
                 _user.updatePassword({
                     passwordOld : userInfo.password,
                     passwordNew : userInfo.passwordNew
-                },function (res,msg) {
-                    _mm.successTips(msg);
-                },function (errMsg) {
+                }).then( (res) =>{
+                    _mm.successTips(res);
+                }).catch( (errMsg) =>{
                     _mm.errorTips(errMsg);
                 })
             }else {

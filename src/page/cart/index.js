@@ -21,17 +21,21 @@ let page = {
             let productId = $this.parents('.cart-table').data('product-id');
             // change select status
             if($this.is(':checked')){
-                _cart.selectProduct(productId,function (res) {
-                    that.renderCart(res);
-                },function (errMsg) {
-                    that.showCartError();
-                })
+                _cart.selectProduct(productId)
+                    .then(
+                        (res)=>that.renderCart(res)
+                    )
+                    .catch(
+                        (err)=>that.showCartError()
+                    )
             }else {
-                _cart.unselectProduct(productId,function (res) {
-                    that.renderCart(res);
-                },function (errMsg) {
-                    that.showCartError();
-                })
+                _cart.unselectProduct(productId)
+                    .then(
+                        (res)=>that.renderCart(res)
+                    )
+                    .catch(
+                        (err)=>that.showCartError()
+                    )
             }
         })
         // select all or deselect all
@@ -39,19 +43,23 @@ let page = {
             let $this = $(this);
             // select all
             if($this.is(':checked')){
-                _cart.selectAllProduct(function (res) {
-                    that.loadCart(res);
-                },function (errMsg) {
-                    that.showCartError();
-                })
+                _cart.selectAllProduct()
+                    .then(
+                        (res)=>that.loadCart(res)
+                    )
+                    .catch(
+                        (err)=>that.showCartError()
+                    )
             }
             // deselect all
             else {
-                _cart.unselectAllProduct(function (res) {
-                    that.loadCart(res);
-                },function (errMsg) {
-                    that.showCartError();
-                })
+                _cart.unselectAllProduct()
+                    .then(
+                        (res)=>that.loadCart(res)
+                    )
+                    .catch(
+                        (err)=>that.showCartError()
+                    )
             }
         })
         // change product quantity
@@ -77,14 +85,12 @@ let page = {
                 }
                 newCount = currentCount - 1;
             }
-            _cart.updateProduct({
-                productId:productId,
-                count:newCount
-            },function (res) {
-                that.renderCart(res);
-            },function (errMsg) {
-                that.showCartError();
-            })
+            _cart.updateProduct({productId:productId, count:newCount})
+                .then(
+                    (res)=>that.renderCart(res)
+                )
+                .catch(
+                    (errMsg)=>that.showCartError())
         })
         // delete a product
         $(document).on('click','.cart-delete',function () {
@@ -125,13 +131,13 @@ let page = {
         // loading
         $pageWrap.html(`<span class="loading"></span>`);
         // get shopping cart list
-        _cart.getCartList(function (res) {
-            console.log('@@@');
-            console.log(res);
-            that.renderCart(res);
-        },function (errMsg) {
-            html = that.showCartError();
-        })
+        _cart.getCartList()
+            .then(
+                (res)=>that.renderCart(res)
+            )
+            .catch(
+                (err)=> html = that.showCartError()
+            )
     },
     // render shopping cart html
     renderCart:function (res) {
@@ -224,11 +230,13 @@ let page = {
     // delete product
     deleteCartProduct:function (productIds) {
         let that = this;
-        _cart.deleteProduct(productIds,function (res) {
-            that.renderCart(res);
-        },function (errMsg) {
-            that.showCartError();
-        })
+        _cart.deleteProduct(productIds)
+            .then(
+                (res)=>that.renderCart(res)
+            )
+            .catch(
+                (err)=> html = that.showCartError()
+            )
     }
 };
 

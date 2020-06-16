@@ -20,7 +20,7 @@ let page = {
         let paymentHtml = ``;
         let $pageWrap = $('.page-wrap');
         $pageWrap.html(`<div class="loading"></div>`);
-        _payment.getPaymentInfo(this.data.orderNumber,function (res) {
+        _payment.getPaymentInfo(this.data.orderNumber).then( (res)=> {
             paymentHtml = `
                 <p class="payment-tips">Successfully submit order, the order number is ${res.orderNo}</p>
                 <p class="payment-tips enhance">Please use Alipay to scan the QR code to pay for the order:</p>
@@ -30,22 +30,17 @@ let page = {
             `;
             $pageWrap.html(paymentHtml);
             that.listenOrderStatus();
-        },function (errMsg) {
-            console.log(errMsg);
-            $pageWrap.html(`<p class="err-tip">${errMsg}</p>`)
-        })
+        }).catch( (errMsg) => $pageWrap.html(`<p class="err-tip">${errMsg}</p>`) )
     },
     // watch order status
     listenOrderStatus:function () {
         var that = this;
         this.paymentTimer = setInterval(function () {
-            _payment.getPaymentStatus(that.data.orderNumber,function (res) {
+            _payment.getPaymentStatus(that.data.orderNumber).then( (res) => {
                 if(!res){
                     window.location.href = './result.html?type=payment&orderNumber='+that.data.orderNumber;
                 }
-            },function (errMsg) {
-
-            })
+            }).catch(errMsg=>{})
         },5000)
     }
 };

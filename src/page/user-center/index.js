@@ -20,8 +20,8 @@ let page = {
     },
     loadUserInfo:function () {
         let userHtml = '';
-        _user.getUserInfo(function (res) {
-            console.log(res);
+        _user.getUserInfo()
+            .then( (res)=> {
             userHtml = `
             <div class="user-info">
                     <div class="form-line">
@@ -48,9 +48,8 @@ let page = {
                 </div>
             `;
             $('.panel-body').html(userHtml);
-        },function (errMsg) {
-            _mm.errorTips(errMsg);
         })
+            .catch( (errMsg) => _mm.errorTips(errMsg))
     }
 };
 $(function () {

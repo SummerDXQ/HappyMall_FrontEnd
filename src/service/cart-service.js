@@ -1,82 +1,63 @@
-var _mm = require('util/hm.js');
+var _hm = require('util/hm.js');
 
 var _cart = {
     // get shopping cart quantity
-    getCartCount : function(resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/get_cart_product_count.do'),
-            success : resolve,
-            error   : reject
+    getCartCount (){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/get_cart_product_count.do'),
         });
     },
     // Add to shopping cart
-    addToCart : function(productInfo, resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/add.do'),
+    addToCart (productInfo){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/add.do'),
             data    : productInfo,
-            success : resolve,
-            error   : reject
         });
     },
     // Request product list
-    getCartList : function(resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/list.do'),
-            success : resolve,
-            error   : reject
+    getCartList (){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/list.do'),
         });
     },
     // select product
-    selectProduct : function(productId,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/select.do'),
-            data    : {productId : productId},
-            success : resolve,
-            error   : reject
+    selectProduct (productId){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/select.do'),
+            data    : {productId : productId}
         });
     },
     // deselect product
-    unselectProduct : function(productId,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/un_select.do'),
+    unselectProduct (productId){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/un_select.do'),
             data    : {productId : productId},
-            success : resolve,
-            error   : reject
         });
     },
     // select all product
-    selectAllProduct : function(resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/select_all.do'),
-            success : resolve,
-            error   : reject
+    selectAllProduct (){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/select_all.do'),
         });
     },
     // deselect all product
-    unselectAllProduct : function(resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/un_select_all.do'),
-            success : resolve,
-            error   : reject
+    unselectAllProduct (){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/un_select_all.do'),
         });
     },
     // update product quantity
-    updateProduct : function(productInfo,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/update.do'),
+    updateProduct (productInfo){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/update.do'),
             data    : productInfo,
-            success : resolve,
-            error   : reject
         });
     },
     // delete a product
-    deleteProduct : function(productIds,resolve, reject){
-        console.log(productIds);
-        _mm.request({
-            url     : _mm.getServerUrl('/cart/delete_product.do'),
+    deleteProduct (productIds){
+        return _hm.request({
+            url     : _hm.getServerUrl('/cart/delete_product.do'),
             data    : {productIds:productIds},
-            success : resolve,
-            error   : reject
         });
     },
     // delete selected product

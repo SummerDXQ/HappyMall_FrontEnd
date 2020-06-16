@@ -30,13 +30,13 @@ let page = {
         $(document).on('click','.order-submit',function () {
             let shippingId = that.data.selectedAddressId;
             if(shippingId){
-                _order.createOrder({
-                    shippingId: shippingId
-                },function (res) {
-                    window.location.href = './payment.html?orderNumber='+ res.orderNo;
-                },function (errMsg) {
-                    _hm.errorTips(errMsg);
-                })
+                _order.createOrder({shippingId: shippingId})
+                    .then(
+                        (res)=>window.location.href = './payment.html?orderNumber='+ res.orderNo
+                    )
+                    .catch(
+                    (errMsg)=>_hm.errorTips(errMsg)
+                    )
             }else {
                 _hm.errorTips('Please select address before submitting order!')
             }
@@ -116,44 +116,47 @@ let page = {
         })
     },
     // load product list
-    loadProductList:function () {
+    loadProductList () {
         $('.product-con').html('<div class="loading"></div>');
-        _order.getProductList(function (res) {
-            let ProductListHtml = `
-                <table class="product-table">
-                <tr>
-                    <th class="cell-img">&nbsp;</th>
-                    <th class="cell-info">Product Description</th>
-                    <th class="cell-price">Price</th>
-                    <th class="cell-count">Quantity</th>
-                    <th class="cell-total">Total</th>
-                </tr>`;
-            res.orderItemVoList.map((item,index)=>{
-                ProductListHtml +=
-                `<tr>
-                        <td class="cell-img">
-                            <a href="./detail.html?productId=">
-                            <img src="${res.imageHost}${item.productImage}" alt="" class="p-img">
-                            </a>
-                        </td>
-                        <td class="cell-info">
-                            <a href="./detail.html?productId=" class="link">${item.productName}</a>
-                        </td>
-                        <td class="cell-price">${item.currentUnitPrice}</td>
-                        <td class="cell-count">${item.quantity}</td>
-                        <td class="cell-total">${item.totalPrice}</td>
-                     </tr>`
-            })
-            ProductListHtml +=`</table>
-            <div class="submit-con">
-                <span>Total Price:</span>
-                <span class="submit-total">${res.productTotalPrice}</span>
-                <span class="btn order-submit">Submit </span>
-            </div>`
-            $('.product-con').html(ProductListHtml)
-        },function (errMsg) {
-            $('.product-con ').html(`<p class="err-tip">Loading product list failed, please try again!</p>`)
-        })
+        _order.getProductList
+            .then (
+                (res)=> {
+                    let ProductListHtml = `
+                        <table class="product-table">
+                        <tr>
+                            <th class="cell-img">&nbsp;</th>
+                            <th class="cell-info">Product Description</th>
+                            <th class="cell-price">Price</th>
+                            <th class="cell-count">Quantity</th>
+                            <th class="cell-total">Total</th>
+                        </tr>`;
+                    res.orderItemVoList.map((item,index)=>{
+                        ProductListHtml +=
+                        `<tr>
+                                <td class="cell-img">
+                                    <a href="./detail.html?productId=">
+                                    <img src="${res.imageHost}${item.productImage}" alt="" class="p-img">
+                                    </a>
+                                </td>
+                                <td class="cell-info">
+                                    <a href="./detail.html?productId=" class="link">${item.productName}</a>
+                                </td>
+                                <td class="cell-price">${item.currentUnitPrice}</td>
+                                <td class="cell-count">${item.quantity}</td>
+                                <td class="cell-total">${item.totalPrice}</td>
+                             </tr>`
+                    })
+                    ProductListHtml +=`</table>
+                    <div class="submit-con">
+                        <span>Total Price:</span>
+                        <span class="submit-total">${res.productTotalPrice}</span>
+                        <span class="btn order-submit">Submit </span>
+                    </div>`
+                    $('.product-con').html(ProductListHtml)
+                })
+            .catch(
+                (errMsg)=>$('.product-con ').html(`<p class="err-tip">Loading product list failed, please try again!</p>`)
+        )
     },
     // address list's selected status
     addressFilter:function (data) {

@@ -22,7 +22,7 @@ let page = {
     // load user information
     loadUserInfo:function () {
         let userHtml = '';
-        _user.getUserInfo(function (res) {
+        _user.getUserInfo().then( (res)=> {
             userHtml = `
             <div class="user-info">
                     <div class="form-line">
@@ -49,9 +49,7 @@ let page = {
                 </div>
             `;
             $('.panel-body').html(userHtml);
-        },function (errMsg) {
-            _mm.errorTips(errMsg);
-        })
+        }).catch( (errMsg)=>_mm.errorTips(errMsg))
     },
     bindEvent:function () {
         let that = this;
@@ -66,10 +64,12 @@ let page = {
             let validateResult = that.validateForm(userInfo);
             if(validateResult.status){
                 // edit user information
-                _user.updateUserInfo(userInfo,function (res,msg) {
-                    _mm.successTips(msg);
+                _user.updateUserInfo(userInfo)
+                    .then( (res) => {
+                    _mm.successTips(res);
                     window.location.href = './user-center.html';
-                },function (errMsg) {
+                })
+                    .catch( (errMsg)=> {
                     _mm.errorTips(errMsg);
                 })
             }else {

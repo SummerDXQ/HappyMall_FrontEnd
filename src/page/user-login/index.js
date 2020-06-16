@@ -41,11 +41,13 @@ let page = {
         let validateResult = that.formValidate(formData);
         // validate success
         if(validateResult.status){
-            _user.login(formData,function (res) {
-                window.location.href = _hm.getUrlParam('redirect') || './index.html';
-            },function (errMsg) {
-                formError.show(errMsg)
-            })
+            _user.login(formData)
+                .then(()=>{
+                    window.location.href = _hm.getUrlParam('redirect') || './index.html';
+                })
+                .catch((errMsg)=>{
+                    formError.show(errMsg)
+                })
         }
         // validate fail
         else{

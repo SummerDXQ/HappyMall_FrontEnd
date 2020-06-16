@@ -40,13 +40,13 @@ var nav = {
     },
     // load shopping cart quantity
     loadCartCount:function () {
-        _cart.getCartCount(function (res) {
-            console.log('quantity');
-            console.log(res);
-            $('.nav .cart-count').text(res || 0);
-        },function (errMsg) {
-            $('.nav .cart-count').text(0);
-        })
+        _cart.getCartCount()
+            .then(
+                (res)=>$('.nav .cart-count').text(res || 0)
+            )
+            .catch(
+                (errMsg)=>$('.nav .cart-count').text(0)
+            )
     }
 };
 

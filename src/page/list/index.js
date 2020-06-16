@@ -63,13 +63,12 @@ let page = {
         $pListCon.html('<div class="loading"></div>');
         // delete unnecessary parameters
         listParam.categoryId ? (delete listParam.keyword) : (delete listParam.categoryId);
-        _product.getProductList(listParam,function (res) {
-            // console.log('-----------');
-            // console.log(res);
-            if(res.list.length > 0){
-                res.list.map((item,index)=>{
-                    return(
-                        listHtml += `
+        _product.getProductList(listParam)
+            .then( (res)=> {
+                if (res.list.length > 0) {
+                    res.list.map((item, index) => {
+                        return (
+                            listHtml += `
                         <li class="p-item">
                             <div class="p-img-con">
                                 <a class="link" href="./detail.html?productId=${item.id}" target="_blank">
@@ -84,24 +83,25 @@ let page = {
                             </div>
                         </li>
                     `
-                    )
+                        )
+                    })
+                } else {
+                    listHtml = `<p class="err-tip">The product is not exist!</p>`
+                }
+                // console.log(listHtml);
+                $('.p-list-con').html(listHtml);
+                that.loadPagination({
+                    hasPreviousPage: res.hasPreviousPage,
+                    prePage: res.prePage,
+                    hasNextPage: res.hasNextPage,
+                    nextPage: res.nextPage,
+                    pageNum: res.pageNum,
+                    pages: res.pages,
                 })
-            }else {
-                listHtml = `<p class="err-tip">The product is not exist!</p>`
-            }
-            // console.log(listHtml);
-            $('.p-list-con').html(listHtml);
-            that.loadPagination({
-                hasPreviousPage:res.hasPreviousPage,
-                prePage:res.prePage,
-                hasNextPage:res.hasNextPage,
-                nextPage:res.nextPage,
-                pageNum:res.pageNum,
-                pages:res.pages,
-            });
-        },function (errMsg) {
-            _hm.errorTips(errMsg);
-        })
+            })
+            .catch(
+                (errMsg) =>_hm.errorTips(errMsg)
+        )
     },
     // load pagination
     loadPagination:function (pageInfo) {

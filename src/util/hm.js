@@ -4,30 +4,32 @@ let conf = {
 }
 let _hm = {
     // request data
-    request:function (param) {
+    request (param) {
         let that = this;
-        $.ajax({
-            type:param.method || 'get',
-            url: param.url || '',
-            dataType:param.type || 'json',
-            data:param.data || '',
-            success:function (res) {
-                // request success
-                if(res.status === 0){
-                    typeof param.success === 'function' && param.success(res.data)
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+                type:param.method || 'get',
+                url: param.url || '',
+                dataType:param.type || 'json',
+                data:param.data || '',
+                success (res) {
+                    // request success
+                    if(res.status === 0){
+                        resolve(res.data);
+                    }
+                    // haven't login
+                    else if(res.status === 10){
+                        that.doLogin();
+                    }
+                    else if(res.status === 1){
+                        resolve(res.msg);
+                    }
+                },
+                // 404 or 503 etc.
+                error (err) {
+                    reject(err.statusText)
                 }
-                // haven't login
-                else if(res.status === 10){
-                    that.doLogin();
-                }
-                else if(res.status === 1){
-                    typeof param.success === 'function' && param.error(res.msg)
-                }
-            },
-            // 404 or 503 etc.
-            error:function (err) {
-                typeof param.success === 'function' && param.error(err.statusText)
-            }
+            })
         })
     },
     // user-login

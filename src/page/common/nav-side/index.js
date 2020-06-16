@@ -1,6 +1,6 @@
 require('./index.css');
 let _hm = require('util/hm.js');
-let templateIndex = require('./index.string');
+
 // side navigation
 let navSide = {
     option:{
@@ -13,7 +13,6 @@ let navSide = {
         ]
     },
     init:function (option) {
-        console.log(option);
         // merge options
         $.extend(this.option,option);
         this.renderNav();

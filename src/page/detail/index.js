@@ -44,11 +44,11 @@ let page = {
             _cart.addToCart({
                 productId   : that.data.productId,
                 count       : $('.p-count').val()
-            }, function(res){
-                window.location.href = './result.html?type=cart-add';
-            }, function(errMsg){
-                _hm.errorTips(errMsg);
-            });
+            }).then(
+                ()=>window.location.href = './result.html?type=cart-add'
+            ).catch(
+                (errMsg)=>_hm.errorTips(errMsg)
+            )
         });
     },
     // load product detail
@@ -57,18 +57,20 @@ let page = {
         let html = '';
         let $pageWrap = $('.page-wrap');
         $pageWrap.html('<div class="loading"></div>')
-        _product.getProductDetail(this.data.productId,function (res) {
-            that.filter(res);
-            // store product detail information
-            that.data.detailInfo = res;
-            // thumb images
-            let thumbImageHtml = res.subImages.map((index,item)=>{
-                return(
-                    `<li class="p-img-item">
+        _product.getProductDetail(this.data.productId)
+            .then(
+                (res)=>{
+                    that.filter(res);
+                    // store product detail information
+                    that.data.detailInfo = res;
+                    // thumb images
+                    let thumbImageHtml = res.subImages.map((index,item)=>{
+                        return(
+                            `<li class="p-img-item">
                     <img class="p-img" src="${res.imageHost}${res.mainImage}" alt="">
                     </li>`
-            )})
-            html = `
+                        )})
+                    html = `
                 <div class="intro-wrap">
                     <div class="p-img-con">
                         <div class="main-img-con">
@@ -76,12 +78,12 @@ let page = {
                         </div>
                         <ul class="p-img-list">
                             ${
-                                res.subImages.map((item,index)=>{
-                                    return(
-                                        `<li class="p-img-item" key="${index}"><img class="p-img" src="${res.imageHost}${item}" alt=""></li>`
-                                    )
-                                })
-                            }
+                        res.subImages.map((item,index)=>{
+                            return(
+                                `<li class="p-img-item" key="${index}"><img class="p-img" src="${res.imageHost}${item}" alt=""></li>`
+                            )
+                        })
+                    }
                         </ul>
                     </div>
                     <div class="p-info-con">
@@ -117,10 +119,12 @@ let page = {
                     </div>
                 </div>
             `;
-            $pageWrap.html(html);
-        },function (errMsg) {
-            $pageWrap.html('<p class="err-tip">The product is not exist</p>')
-        })
+                    $pageWrap.html(html);
+                }
+            )
+            .catch(
+                (errMsg)=>$pageWrap.html('<p class="err-tip">The product is not exist</p>')
+            )
     },
     filter:function (data) {
         data.subImages = data.subImages.split(',');

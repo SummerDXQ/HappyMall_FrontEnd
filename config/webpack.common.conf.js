@@ -12,6 +12,7 @@ let getHtmlConfig = function(name, title){
     return {
         template    : './src/view/' + name + '.html',
         filename    : 'view/' + name + '.html',
+        favicon     : './favicon.ico',
         title       : title,
         inject      : true,
         hash        : true,
@@ -37,6 +38,7 @@ module.exports = {
         'user-center':'./src/page/user-center/index.js',
         'user-center-update':'./src/page/user-center-update/index.js',
         'result':'./src/page/result/index.js',
+        'about':'./src/page/about/index.js',
     },
     output: {
         path: path.resolve(__dirname,'../dist'),
@@ -145,6 +147,7 @@ module.exports = {
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', 'Password Update')),
         new HtmlWebpackPlugin(getHtmlConfig('user-center', 'User Center')),
         new HtmlWebpackPlugin(getHtmlConfig('user-center-update', 'Update Profile')),
+        new HtmlWebpackPlugin(getHtmlConfig('about', 'About Us')),
         new ExtractTextPlugin('./css/[name].css'),
         new HappyPack({
             id:"happyBabel",
