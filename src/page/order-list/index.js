@@ -30,7 +30,8 @@ let page = {
         let orderListHtml = '';
         let $listCon = $('.order-list-con');
         $listCon.html('<p class="loading"></p>');
-        _order.getOrderList(this.data.listParam,function (res) {
+        _order.getOrderList(this.data.listParam)
+            .then( (res)=> {
             if(res.list.length === 0 ){
                 $listCon.html(`<p class="err-tip">You have not orders!</p>`);
                 return;
@@ -96,9 +97,9 @@ let page = {
                 pages:res.pages,
                 }
             );
-        },function (errMsg) {
-            $listCon.html('<p class="err-tip">Load oder list fail, please try again!</p>')
-        });
+        })
+            .catch(
+                errMsg=>$listCon.html('<p class="err-tip">Load oder list fail, please try again!</p>'))
     },
     // load pagination
     loadPagination:function (pageInfo) {

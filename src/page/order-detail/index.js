@@ -25,12 +25,15 @@ let page = {
         let that = this;
         $(document).on('click','.order-cancel',function () {
             if(window.confirm('Do you want to cancel the order?')){
-                _order.cancelOrder(that.data.orderNumber,function (res) {
-                    _hm.successTips('Successfully cancel order');
-                    that.loadDetail();
-                },function (errMsg) {
-                    _hm.errorTips(errMsg);
-                });
+                _order.cancelOrder(that.data.orderNumber)
+                    .then(
+                        (res)=>{
+                            _hm.successTips('Successfully cancel order');
+                            that.loadDetail();
+                        })
+                    .catch(
+                        errMsg=>_hm.errorTips(errMsg)
+                    )
             }
         })
     },
@@ -39,7 +42,8 @@ let page = {
         let orderDetailHtml = ``;
         let $content = $('.content');
         $content.html(`<div class="loading"></div>`);
-        _order.getOrderDetail(this.data.orderNumber,function (res) {
+        _order.getOrderDetail(this.data.orderNumber)
+            .then(  (res)=> {
             that.dataFilter(res);
             orderDetailHtml = `
                 <div class="panel">
@@ -111,9 +115,10 @@ let page = {
                     </div>
                 </div>`;
             $content.html(orderDetailHtml);
-        },function (errMsg) {
-            $listCon.html(`<p class="err-tip">${errMsg}</p>`)
         })
+            .catch(
+                errMsg=>$listCon.html(`<p class="err-tip">${errMsg}</p>`)
+            )
     },
     dataFilter:function (data) {
         data.needPay = data.status === 10;

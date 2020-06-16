@@ -1,51 +1,41 @@
-var _mm = require('util/hm.js');
+var _hm = require('util/hm.js');
 
 var _address = {
     // request address list
-    getAddressList : function(resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/shipping/list.do'),
+    getAddressList (){
+        return _hm.request({
+            url     : _hm.getServerUrl('/shipping/list.do'),
             data    :{
                 pageSize:50
-            },
-            success : resolve,
-            error   : reject
+            }
         });
     },
     // add new address
-    save : function(addressInfo,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/shipping/add.do'),
+    save (addressInfo){
+        return _hm.request({
+            url     : _hm.getServerUrl('/shipping/add.do'),
             data    : addressInfo,
-            success : resolve,
-            error   : reject
         });
     },
     // update address
-    update : function(addressInfo,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/shipping/update.do'),
+    update (addressInfo){
+        return _hm.request({
+            url     : _hm.getServerUrl('/shipping/update.do'),
             data    : addressInfo,
-            success : resolve,
-            error   : reject
         });
     },
     // get specific address info
-    getAddress : function(shippingId,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/shipping/select.do'),
+    getAddress (shippingId){
+        return _hm.request({
+            url     : _hm.getServerUrl('/shipping/select.do'),
             data    : {shippingId:shippingId},
-            success : resolve,
-            error   : reject
         });
     },
     // delete address
-    deleteAddress:function(shippingId,resolve, reject){
-        _mm.request({
-            url     : _mm.getServerUrl('/shipping/del.do'),
+    deleteAddress (shippingId){
+        return _hm.request({
+            url     : _hm.getServerUrl('/shipping/del.do'),
             data    : {shippingId:shippingId},
-            success : resolve,
-            error   : reject
         });
     },
 }
